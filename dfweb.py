@@ -17,6 +17,9 @@ def analysis():
     x = pd.DataFrame(np.random.randn(20, 5))
     return render_template("analysis.html", name='amir', data=x)
 
+@app.route('/slider')
+def slider():
+    return render_template("slider.html")
 
 if __name__ == '__main__':
     app.run(debug=True)
