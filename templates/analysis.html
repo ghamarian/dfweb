@@ -9,6 +9,7 @@
 
 {% block content %}
     <h1>{{ name }}</h1>
+
     {{ data.to_html(classes="table table-striped display", table_id="amir") | safe }}
 
     <button type="button" id="send">Next</button>
@@ -21,4 +22,5 @@
 {#    <script src="{{ url_for('.static', filename='dataTables.select.js') }}"></script>#}
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/sl-1.2.5/datatables.min.js"></script>
     <script src="{{ url_for('.static', filename='table.js') }}"></script>
+
 {% endblock %}

@@ -39,27 +39,50 @@ $(document).ready(function () {
                 "targets": 1
             }
         ],
-        'ordering': false
+        'ordering': false,
+        "pageLength": 2
+
+
     });
 
-    $('#send').click(function (event) {
-        event.preventDefault();
-        var cat_column = table.columns(1).data()[0]
-        console.log(cat_column);
-        console.log(typeof(cat_column));
 
-        $.ajax('/cat_col', {
-            data: {'cat_column': JSON.stringify(cat_column)},
-            dataType: 'json',
-            type: "POST",
-            // contentType: "application/json; charset=utf-8",
-            cache: false,
-            // data: {"a": "b"},
-            success: function (data) {
-                console.log("hello");
-            }
-        });
+    $('#amir').on('page.dt', function () {
+        var info = table.page.info();
+        $('#pageInfo').html('Showing page: ' + info.page + ' of ' + info.pages);
+        var data = table.$('select option:selected').text();
+        alert(data);
     });
+
+    $('#send').click(function () {
+        // var data = table.$('select').serialize();
+        var data = table.$('select option:selected').text();
+        alert('Data source: ' + table.columns([0, 1]).dataSrc().join(' '));
+        alert(
+            "The following data would have been submitted to the server: \n\n" +
+            data.substr(0, 120) + '...'
+        );
+        return false;
+    });
+
+    // $('#send').click(function (event) {
+    //     event.preventDefault();
+    //     var cat_column = table.columns(1).data()[0]
+    //     console.log(cat_column);
+    //     console.log(typeof(cat_column));
+    //
+    //
+    //     $.ajax('/cat_col', {
+    //         data: {'cat_column': JSON.stringify(cat_column)},
+    //         dataType: 'json',
+    //         type: "POST",
+    //         // contentType: "application/json; charset=utf-8",
+    //         cache: false,
+    //         // data: {"a": "b"},
+    //         success: function (data) {
+    //             console.log("hello");
+    //         }
+    //     });
+    // });
 
 
     // var table = $('#amir').DataTable({

@@ -22,6 +22,7 @@ def analysis():
     data=(x.iloc[:6, :]).T
     data.reset_index()
     data.insert(0, 'category', cat)
+
     return render_template("analysis.html", name='amir', data=data)
 
 
