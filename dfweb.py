@@ -1,7 +1,8 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, jsonify
 import pandas as pd
 import numpy as np
 from flask_bootstrap import Bootstrap
+import json
 
 app = Flask(__name__)
 Bootstrap(app)
@@ -28,6 +29,11 @@ def assign_category(col_numbers):
     cat = np.random.choice(['numerical', 'categorical'], col_numbers)
     return cat
 
+@app.route('/cat_col', methods=['GET', 'POST'])
+def cat_col():
+    category_list = json.loads(request.form['cat_column'])
+    print(category_list, type(category_list))
+    return jsonify({'category_list': 2})
 
 @app.route('/slider')
 def slider():

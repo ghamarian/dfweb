@@ -10,6 +10,9 @@
 {% block content %}
     <h1>{{ name }}</h1>
     {{ data.to_html(classes="table table-striped display", table_id="amir") | safe }}
+
+    <button type="button" id="send">Next</button>
+
 {% endblock %}
 
 {% block scripts %}

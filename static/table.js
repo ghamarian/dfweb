@@ -22,7 +22,6 @@
 // ;
 
 
-
 $(document).ready(function () {
 
     category = {
@@ -31,7 +30,7 @@ $(document).ready(function () {
     };
 
 
-    $('#amir').DataTable({
+    table = $('#amir').DataTable({
         "columnDefs": [
             {
                 "render": function (data, type, row) {
@@ -41,6 +40,25 @@ $(document).ready(function () {
             }
         ],
         'ordering': false
+    });
+
+    $('#send').click(function (event) {
+        event.preventDefault();
+        var cat_column = table.columns(1).data()[0]
+        console.log(cat_column);
+        console.log(typeof(cat_column));
+
+        $.ajax('/cat_col', {
+            data: {'cat_column': JSON.stringify(cat_column)},
+            dataType: 'json',
+            type: "POST",
+            // contentType: "application/json; charset=utf-8",
+            cache: false,
+            // data: {"a": "b"},
+            success: function (data) {
+                console.log("hello");
+            }
+        });
     });
 
 
