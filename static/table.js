@@ -36,11 +36,18 @@ $(document).ready(function () {
                 "render": function (data, type, row) {
                     return category[data];
                 },
+                // "data": function (row, type, val, meta) {
+                //     if (type === 'set') {
+                //         row.cat = category[val];
+                //         return;
+                //     }
+                //     return row.cat;
+                // },
                 "targets": 1
             }
         ],
         'ordering': false,
-        "pageLength": 2
+        // "pageLength": 2
 
 
     });
@@ -53,36 +60,38 @@ $(document).ready(function () {
         alert(data);
     });
 
-    $('#send').click(function () {
-        // var data = table.$('select').serialize();
-        var data = table.$('select option:selected').text();
-        alert('Data source: ' + table.columns([0, 1]).dataSrc().join(' '));
-        alert(
-            "The following data would have been submitted to the server: \n\n" +
-            data.substr(0, 120) + '...'
-        );
-        return false;
-    });
-
-    // $('#send').click(function (event) {
-    //     event.preventDefault();
-    //     var cat_column = table.columns(1).data()[0]
-    //     console.log(cat_column);
-    //     console.log(typeof(cat_column));
-    //
-    //
-    //     $.ajax('/cat_col', {
-    //         data: {'cat_column': JSON.stringify(cat_column)},
-    //         dataType: 'json',
-    //         type: "POST",
-    //         // contentType: "application/json; charset=utf-8",
-    //         cache: false,
-    //         // data: {"a": "b"},
-    //         success: function (data) {
-    //             console.log("hello");
-    //         }
-    //     });
+    // $('#send').click(function () {
+    //     // var data = table.$('select').serialize();
+    //     var data = table.$('select option:selected').text();
+    //     alert('Data source: ' + table.columns([0, 1]).dataSrc().join(' '));
+    //     alert(
+    //         "The following data would have been submitted to the server: \n\n" +
+    //         data.substr(0, 120) + '...'
+    //     );
+    //     return false;
     // });
+
+    $('#send').click(function (event) {
+        event.preventDefault();
+        // var cat_column = table.columns(1).data()[0]
+        var cat_column = table.$('select option:selected').text().split();
+
+        console.log(cat_column);
+        console.log(typeof(cat_column));
+
+
+        $.ajax('/cat_col', {
+            data: {'cat_column': JSON.stringify(cat_column)},
+            dataType: 'json',
+            type: "POST",
+            // contentType: "application/json; charset=utf-8",
+            cache: false,
+            // data: {"a": "b"},
+            success: function (data) {
+                console.log("hello");
+            }
+        });
+    });
 
 
     // var table = $('#amir').DataTable({
